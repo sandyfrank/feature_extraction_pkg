@@ -29,6 +29,7 @@ The package extracts **9 different types of protein features**:
    
 8. **Word2Vec Features** - G5 (100 features)
    - Word2Vec embeddings based on 3-grams
+   - Trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)
    
 9. **ESM Embeddings** - G9 (1280 features)
    - Pre-trained ESM language model embeddings from layer 33

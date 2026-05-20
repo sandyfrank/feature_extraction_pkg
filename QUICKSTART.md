@@ -85,7 +85,7 @@ feature_extraction_pkg/
 | Dipeptide Composition | G2_ | 400 | Normalized frequency of dipeptide pairs |
 | Physicochemical Properties | G3_ | 42 | Properties and transitions |
 | Conjoint Triad | G4_ | 343 | 7×7×7 triad matrix |
-| Word2Vec | G5_ | 100 | Word2Vec embeddings (3-grams) |
+| Word2Vec | G5_ | 100 | 3-grams; trained on NCBI 2023 (~37K genomes, 80M+ proteins) |
 | Entropy | G6_ | 10 | Shannon entropy per segment |
 | Protein Parameters | G7_ | 7 | Physical/chemical properties |
 | QSO | G8_ | 50 | Quasi-sequence order |

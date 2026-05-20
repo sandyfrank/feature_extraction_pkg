@@ -6,11 +6,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="protein-feature-extraction",
     version="1.0.0",
-    author="Feature Extraction Team",
-    description="A comprehensive package for extracting 9 types of protein features from FASTA files",
+    author="Sandy-Frank NGAHA, Nelle VAROQUAUX, and Sophie ABBY",
+    author_email="sandy.ngaha@aims-cameroon.org",
+    description="A comprehensive package for extracting 9 types of protein features from FASTA files. Includes Word2Vec embeddings trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/protein-feature-extraction",
+    url="https://github.com/sandyfrank/feature_extraction_pkg.git",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

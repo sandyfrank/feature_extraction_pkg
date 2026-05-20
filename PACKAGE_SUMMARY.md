@@ -81,7 +81,7 @@ A complete Python package for extracting **9 different types of protein features
 | 2 | Dipeptide Composition | G2_ | 400 | Normalized frequency of dipeptide pairs |
 | 3 | Physicochemical Properties | G3_ | 42 | 21 properties + 21 transitions |
 | 4 | Conjoint Triad Composition | G4_ | 343 | 7×7×7 triad matrix flattened |
-| 5 | Word2Vec Embeddings | G5_ | 100 | 3-gram based embeddings |
+| 5 | Word2Vec Embeddings | G5_ | 100 | 3-gram based; trained on NCBI 2023 database (~37,000 genomes, 80+ million proteins) |
 | 6 | Entropy Features | G6_ | 10 | Shannon entropy per segment |
 | 7 | Protein Parameters | G7_ | 7 | Molecular weight, etc. |
 | 8 | Quasi-Sequence Order | G8_ | 50 | Sequence-order coupling |

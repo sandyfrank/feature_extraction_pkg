@@ -2,8 +2,9 @@ Metadata-Version: 2.4
 Name: protein-feature-extraction
 Version: 1.0.0
 Summary: A comprehensive package for extracting 9 types of protein features from FASTA files
-Home-page: https://github.com/yourusername/protein-feature-extraction
+Home-page: https://github.com/sandyfrank/feature_extraction_pkg.git
 Author: Feature Extraction Team
+Author-email: sandy.ngaha@aims-cameroon.org
 License: MIT
 Project-URL: Bug Tracker, https://github.com/yourusername/protein-feature-extraction/issues
 Project-URL: Documentation, https://github.com/yourusername/protein-feature-extraction/wiki
@@ -21,6 +22,7 @@ Requires-Dist: fair-esm
 Provides-Extra: dev
 Requires-Dist: pytest; extra == "dev"
 Requires-Dist: pytest-cov; extra == "dev"
+Dynamic: author-email
 Dynamic: home-page
 Dynamic: license-file
 Dynamic: requires-python
@@ -56,6 +58,7 @@ The package extracts **9 different types of protein features**:
    
 8. **Word2Vec Features** - G5 (100 features)
    - Word2Vec embeddings based on 3-grams
+   - Trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)
    
 9. **ESM Embeddings** - G9 (1280 features)
    - Pre-trained ESM language model embeddings from layer 33
