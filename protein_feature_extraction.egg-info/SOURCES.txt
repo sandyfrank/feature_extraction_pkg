@@ -1,7 +1,13 @@
 LICENSE
+MANIFEST.in
 README.md
+example_proteins.fasta
 pyproject.toml
 setup.py
+Features_Extraction/FeaturesExtractionModule.py
+Features_Extraction/extract_esm.py
+Features_Extraction/utils.py
+Features_Extraction/word2vec_train.txt
 protein_feature_extraction.egg-info/PKG-INFO
 protein_feature_extraction.egg-info/SOURCES.txt
 protein_feature_extraction.egg-info/dependency_links.txt

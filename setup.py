@@ -13,6 +13,10 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/sandyfrank/feature_extraction_pkg.git",
     packages=find_packages(),
+    package_data={
+        '': ['example_proteins.fasta', 'word2vec_train.txt'],
+    },
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",

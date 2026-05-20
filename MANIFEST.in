@@ -1,0 +1,4 @@
+include README.md
+include LICENSE
+include example_proteins.fasta
+recursive-include Features_Extraction *.py *.txt *.sh
