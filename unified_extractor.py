@@ -264,15 +264,25 @@ def _load_esm_embeddings(esm_output_dir: str, repr_layers: list = None) -> dict:
     return esm_features
 
 
-if __name__ == "__main__":
-    # Example usage
+def main():
+    """Command-line interface for protein feature extraction."""
     import sys
     
     if len(sys.argv) < 2:
-        print("Usage: python unified_extractor.py <fasta_file> [output_file]")
+        print("Usage: extract-proteins <fasta_file> [output_file]")
+        print("\nExample:")
+        print("  extract-proteins proteins.fasta features.csv")
         sys.exit(1)
     
     fasta_file = sys.argv[1]
     output_file = sys.argv[2] if len(sys.argv) > 2 else "all_features.csv"
     
-    extract_all_features(fasta_file, output_file)
+    try:
+        extract_all_features(fasta_file, output_file, verbose=True)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
