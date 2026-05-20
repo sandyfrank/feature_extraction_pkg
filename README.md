@@ -8,65 +8,64 @@ The package extracts **9 different types of protein features**:
 
 1. **Amino Acid Composition (AAC)** - G1 (20 features)
    - Normalized frequency of each amino acid
-   
+
 2. **Dipeptide Composition (DCP)** - G2 (400 features)
    - Normalized frequency of dipeptide pairs
-   
+
 3. **Physicochemical Properties (PCP)** - G3 (42 features)
    - 21 physicochemical properties + 21 transition properties
-   
+
 4. **Conjoint Triad Composition (CTriad)** - G4 (343 features)
    - 7×7×7 triad matrix flattened
-   
+
 5. **Entropy Features** - G6 (10 features)
    - Shannon entropy calculated over 10 sequence segments
-   
+
 6. **Protein Parameters** - G7 (7 features)
    - Molecular weight, aromaticity, instability index, GRAVY, isoelectric point, molar extinction coefficients
-   
+
 7. **Quasi-Sequence Order (QSO)** - G8 (50 features)
    - Sequence-order coupling numbers with weights
-   
+
 8. **Word2Vec Features** - G5 (100 features)
    - Word2Vec embeddings based on 3-grams
    - Trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)
-   
+
 9. **ESM Embeddings** - G9 (1280 features)
    - Pre-trained ESM language model embeddings from layer 33
+
+---
 
 ## Installation
 
 ### Requirements
 
 - Python 3.7+
-- pandas
-- numpy
-- Biopython
-- scipy
-- gensim
-- torch (for ESM embeddings)
-- fair-esm (for ESM embeddings)
+- pandas, numpy, biopython, scipy, gensim, torch, fair-esm
 
-### Setup
+### Install from GitHub
 
 ```bash
-# Install dependencies
-pip install pandas numpy biopython scipy gensim torch fair-esm
+pip3 install git+https://github.com/sandyfrank/feature_extraction_pkg.git
 ```
+
+This installs all dependencies and registers the `extract-proteins` command.
+
+---
 
 ## Usage
 
-### Quick Test
-
-**New to the package?** Try the included example file:
+### Command Line
 
 ```bash
-python -m protein_feature_extraction.unified_extractor example_proteins.fasta example_output.csv
+# Basic usage
+extract-proteins proteins.fasta output_features.csv
+
+# Quick test on the included example file (5 proteins, ~1-2 min)
+extract-proteins example_proteins.fasta example_output.csv
 ```
 
-This runs on 5 example proteins and completes in about **1-2 minutes**.
-
-### Basic Usage
+### Python API
 
 ```python
 from protein_feature_extraction import extract_all_features
@@ -74,8 +73,7 @@ from protein_feature_extraction import extract_all_features
 # Extract all features from a FASTA file
 features_df = extract_all_features("proteins.fasta", "output_features.csv")
 
-# Print information about extracted features
-print(f"Sequences: {features_df.shape[0]}")
+print(f"Sequences    : {features_df.shape[0]}")
 print(f"Total features: {features_df.shape[1]}")
 ```
 
@@ -92,45 +90,51 @@ features_df = extract_all_features(
     esm_tokens_per_batch=4096,
     esm_seq_length=1022,
     esm_repr_layers=[33],
-    verbose=True
+    verbose=True,
 )
 ```
 
-### Command Line Usage
-
-```bash
-python -m protein_feature_extraction.unified_extractor proteins.fasta output_features.csv
-```
+---
 
 ## Parameters
 
-### Main Function: `extract_all_features()`
+### `extract_all_features()`
 
-- **fasta_file** (str): Path to input FASTA file containing protein sequences
-- **output_file** (str): Path to save the combined features CSV (default: "all_features.csv")
-- **word2vec_model_path** (str, optional): Path to Word2Vec model file
-- **esm_model_name** (str): ESM model name (default: "esm2_t33_650M_UR50D")
-- **esm_output_dir** (str, optional): Directory to save ESM embeddings
-- **esm_tokens_per_batch** (int): Tokens per batch for ESM (default: 4096)
-- **esm_seq_length** (int): Maximum sequence length (default: 1022)
-- **esm_repr_layers** (list): ESM representation layers to extract (default: [33])
-- **temp_dir** (str, optional): Temporary directory for intermediate files
-- **verbose** (bool): Print progress messages (default: True)
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `fasta_file` | str | required | Path to input FASTA file |
+| `output_file` | str | `"all_features.csv"` | Path to save output CSV |
+| `word2vec_model_path` | str | None | Path to Word2Vec model file |
+| `esm_model_name` | str | `"esm2_t33_650M_UR50D"` | ESM model name |
+| `esm_output_dir` | str | None | Directory to save ESM embeddings |
+| `esm_tokens_per_batch` | int | `4096` | Tokens per batch for ESM |
+| `esm_seq_length` | int | `1022` | Maximum sequence length |
+| `esm_repr_layers` | list | `[33]` | ESM representation layers |
+| `temp_dir` | str | None | Temporary directory for intermediate files |
+| `verbose` | bool | `True` | Print progress messages |
+
+---
 
 ## Output
 
 The output CSV file contains:
 - **Index**: Protein sequence IDs from the FASTA file
-- **Columns**: Combined features from all 9 extraction methods, with prefixes:
-  - `G1_*`: Amino Acid Composition
-  - `G2_*`: Dipeptide Composition
-  - `G3_*`: Physicochemical Properties
-  - `G4_*`: Conjoint Triad Composition
-  - `G5_*`: Word2Vec Features
-  - `G6_*`: Entropy Features
-  - `G7_*`: Protein Parameters
-  - `G8_*`: QSO Features
-  - `G9_*`: ESM Embeddings
+- **Columns**: Combined features from all 9 extraction methods
+
+| Prefix | Feature type | # Features |
+|---|---|---|
+| `G1_*` | Amino Acid Composition | 20 |
+| `G2_*` | Dipeptide Composition | 400 |
+| `G3_*` | Physicochemical Properties | 42 |
+| `G4_*` | Conjoint Triad Composition | 343 |
+| `G5_*` | Word2Vec Features | 100 |
+| `G6_*` | Entropy Features | 10 |
+| `G7_*` | Protein Parameters | 7 |
+| `G8_*` | QSO Features | 50 |
+| `G9_*` | ESM Embeddings | 1280 |
+| | **Total** | **2252** |
+
+---
 
 ## Examples
 
@@ -139,7 +143,6 @@ The output CSV file contains:
 ```python
 from protein_feature_extraction import extract_all_features
 
-# Extract features from proteins.fasta
 df = extract_all_features("proteins.fasta", "features.csv")
 print(df.head())
 ```
@@ -154,7 +157,7 @@ from sklearn.ensemble import RandomForestClassifier
 # Extract features
 X = extract_all_features("proteins.fasta").values
 
-# Standardize features
+# Standardize
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
@@ -163,19 +166,37 @@ clf = RandomForestClassifier()
 clf.fit(X_scaled, y)
 ```
 
+---
+
 ## Performance Notes
 
-- **Execution time** depends on the number of sequences and feature types:
-  - Basic features (AAC, DCP, PCP, CTriad, Entropy, ProtParams, QSO): ~seconds per 100 sequences
-  - Word2Vec: ~seconds per 100 sequences (depends on sequence length)
-  - ESM embeddings: ~1-2 minutes per 10-20 sequences (GPU recommended for faster processing)
+| Dataset size | CPU | GPU |
+|---|---|---|
+| 5 proteins | ~1–2 min | ~1–2 min |
+| 270 proteins | ~10–15 min | ~5–10 min |
+| 1000+ proteins | 1+ hour | ~30 min |
 
-- **Example runtimes**:
-  - 5 proteins: ~1-2 minutes
-  - 270 proteins: ~10-15 minutes (CPU), ~5-10 minutes (GPU)
-  - 1000+ proteins: 1+ hours (CPU), 30+ minutes (GPU)
+ESM embeddings dominate runtime — GPU is strongly recommended for large datasets.
 
-- **Memory usage**: Approximately 1-2 MB per sequence for basic features, more for ESM embeddings
+Memory usage: ~1–2 MB per sequence for basic features; more for ESM embeddings.
+
+---
+
+## Troubleshooting
+
+**Word2Vec extraction fails**
+Provide the correct model path via `word2vec_model_path`, or ensure the default model exists at the expected location.
+
+**ESM extraction fails**
+Ensure `fair-esm` and `torch` are installed:
+```bash
+pip3 install torch fair-esm
+```
+
+**Out of memory with ESM**
+Use a smaller ESM model, reduce `esm_tokens_per_batch`, or increase available memory.
+
+---
 
 ## Citation
 
@@ -188,33 +209,8 @@ If you use this package in your research, please cite the original feature extra
 - Word2Vec: Mikolov, T. et al. (2013)
 - ESM: Rives, A. et al. (2021)
 
+---
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Troubleshooting
-
-### Issue: "Global outname variable not found"
-**Solution**: The package sets this automatically; no action needed.
-
-### Issue: Word2Vec extraction fails
-**Solution**: Provide the correct model path via `word2vec_model_path` parameter, or ensure the default model exists at the expected location.
-
-### Issue: ESM extraction fails
-**Solution**: Ensure `fair-esm` and `torch` are installed correctly. Run `pip install torch fair-esm`. Check that you have sufficient GPU memory or CPU resources available.
-
-### Issue: Out of memory with ESM
-**Solution**: Use a smaller ESM model, reduce `esm_tokens_per_batch`, or increase available memory.
-
-## Support
-
-For issues, questions, or contributions, please contact the development team or visit the project repository.
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Support for 9 feature extraction methods
-- CLI and Python API interfaces
-- ESM embeddings as core feature
-- Comprehensive error handling
+This project is licensed under the MIT License — see the LICENSE file for details.
