@@ -1,0 +1,3 @@
+[console_scripts]
+extract-proteins = protein_feature_extraction.unified_extractor:main
+

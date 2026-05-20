@@ -161,8 +161,16 @@ def extract_all_features(
         if verbose:
             print("[8/9] Extracting Word2Vec Features...")
         try:
-            extract_word2vec(fasta_file, "features_word2vec.csv", 
-                           model_filename=word2vec_model_path)
+            # Determine Word2Vec model path: use provided path or bundled model
+            model_path = word2vec_model_path
+            if model_path is None:
+                bundled = pathlib.Path(__file__).parent / "Features_Extraction" / "word2vec_train.txt"
+                if bundled.exists():
+                    model_path = str(bundled)
+                else:
+                    raise FileNotFoundError("No Word2Vec model provided and bundled model not found")
+
+            extract_word2vec(fasta_file, "features_word2vec.csv", model_filename=model_path)
             w2v_df = pd.read_csv(os.path.join(temp_dir, "features_word2vec.csv"), index_col=0)
             all_features = all_features.join(w2v_df)
             feature_types.append("Word2Vec")

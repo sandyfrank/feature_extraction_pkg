@@ -1,31 +1,25 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.1
 Name: protein-feature-extraction
 Version: 1.0.0
-Summary: A comprehensive package for extracting 9 types of protein features from FASTA files
+Summary: A comprehensive package for extracting 9 types of protein features from FASTA files. Includes Word2Vec embeddings trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)
 Home-page: https://github.com/sandyfrank/feature_extraction_pkg.git
-Author: Feature Extraction Team
+Author: Sandy-Frank NGAHA, Nelle VAROQUAUX, and Sophie ABBY
 Author-email: sandy.ngaha@aims-cameroon.org
-License: MIT
-Project-URL: Bug Tracker, https://github.com/yourusername/protein-feature-extraction/issues
-Project-URL: Documentation, https://github.com/yourusername/protein-feature-extraction/wiki
-Project-URL: Source Code, https://github.com/yourusername/protein-feature-extraction
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
-License-File: LICENSE
-Requires-Dist: pandas>=1.0.0
-Requires-Dist: numpy>=1.19.0
-Requires-Dist: biopython>=1.78
-Requires-Dist: scipy>=1.5.0
-Requires-Dist: gensim>=4.0.0
-Requires-Dist: torch>=1.9.0
-Requires-Dist: fair-esm
 Provides-Extra: dev
-Requires-Dist: pytest; extra == "dev"
-Requires-Dist: pytest-cov; extra == "dev"
-Dynamic: author-email
-Dynamic: home-page
-Dynamic: license-file
-Dynamic: requires-python
+License-File: LICENSE
 
 # Protein Feature Extraction Package
 
@@ -247,3 +241,5 @@ For issues, questions, or contributions, please contact the development team or 
 - CLI and Python API interfaces
 - ESM embeddings as core feature
 - Comprehensive error handling
+
+

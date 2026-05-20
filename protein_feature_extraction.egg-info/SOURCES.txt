@@ -11,5 +11,6 @@ Features_Extraction/word2vec_train.txt
 protein_feature_extraction.egg-info/PKG-INFO
 protein_feature_extraction.egg-info/SOURCES.txt
 protein_feature_extraction.egg-info/dependency_links.txt
+protein_feature_extraction.egg-info/entry_points.txt
 protein_feature_extraction.egg-info/requires.txt
 protein_feature_extraction.egg-info/top_level.txt

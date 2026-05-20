@@ -8,15 +8,33 @@ setup(
     version="1.0.0",
     author="Sandy-Frank NGAHA, Nelle VAROQUAUX, and Sophie ABBY",
     author_email="sandy.ngaha@aims-cameroon.org",
-    description="A comprehensive package for extracting 9 types of protein features from FASTA files. Includes Word2Vec embeddings trained on NCBI 2023 protein database (~37,000 genomes, 80+ million proteins)",
+    description=(
+        "A comprehensive package for extracting 9 types of protein features "
+        "from FASTA files. Includes Word2Vec embeddings trained on NCBI 2023 "
+        "protein database (~37,000 genomes, 80+ million proteins)"
+    ),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sandyfrank/feature_extraction_pkg.git",
-    packages=find_packages(),
+
+    # ── Package discovery ────────────────────────────────────────────────
+    # The repo root IS the package (feature_extraction_pkg/__init__.py exists).
+    # We expose it under the name 'protein_feature_extraction' so that
+    # the entry point and any `import protein_feature_extraction` work.
+    packages=["protein_feature_extraction", "protein_feature_extraction.Features_Extraction"],
+    package_dir={
+        "protein_feature_extraction":                    ".",
+        "protein_feature_extraction.Features_Extraction": "Features_Extraction",
+    },
+
     package_data={
-        '': ['example_proteins.fasta', 'word2vec_train.txt'],
+        "protein_feature_extraction": [
+            "example_proteins.fasta",
+            "word2vec_train.txt",
+        ],
     },
     include_package_data=True,
+
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
@@ -41,6 +59,9 @@ setup(
     extras_require={
         "dev": ["pytest", "pytest-cov"],
     },
+
+    # ── CLI entry point ──────────────────────────────────────────────────
+    # After pip install: `extract-proteins proteins.fasta output.csv`
     entry_points={
         "console_scripts": [
             "extract-proteins=protein_feature_extraction.unified_extractor:main",
